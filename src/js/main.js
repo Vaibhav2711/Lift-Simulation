@@ -155,9 +155,11 @@ const addLift = (numOfLifts,numOfFloors) =>{
 const startLift = (id) =>{
     //const allLifts = Array.from(document.querySelectorAll(".lift"));
     //liftRequest.push(id);
+    console.log("fire");
     let idleLift;
+    console.log("160");
     if(lifts.find((lift) => lift.getAttribute("state") == "idle")){
-        //console.log(freeLifts);
+        console.log("162");
     //console.log(direction);
         idleLift = lifts.find((lift) => lift.getAttribute("state") == "idle");
         //console.log(idleLift);
