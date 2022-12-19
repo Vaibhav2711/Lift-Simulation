@@ -68,7 +68,7 @@ startBtn.addEventListener("click",(e) => {
     else if (window.innerWidth > 500 && window.innerWidth <= 768 && liftValue > 4) {
         alert("This screen size can't have more than 4 lifts");
     }
-    else if (window.innerWidth > 500 && window.innerWidth <= 1024 && liftValue > 7) {
+    else if (window.innerWidth > 500 && window.innerWidth <= 1024 && liftValue > 6) {
         alert("This screen size can't have more than 7 lifts");
     }
     else if (window.innerWidth > 500 && window.innerWidth <= 1440 && liftValue > 10) {
