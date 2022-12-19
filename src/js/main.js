@@ -41,7 +41,7 @@ const addLift = (numOfLifts = 2,numOfFloors = 3) =>{
         upDown.setAttribute("class","upDown");
         upDown.appendChild(upButton);
         upDown.appendChild(downButton);
-        downButton.addEventListener("click",()=> startLift(z));
+        downButton.addEventListener("click",()=> startLift(j));
         buttonLayout.appendChild(levelNo);
         buttonLayout.appendChild(upDown);
         newFloor.appendChild(buttonLayout);
@@ -101,10 +101,11 @@ const startLift = (id) =>{
             
         }
         let floorDistance = Number(idleLift.getAttribute("floor"))-id;
+        console.log(floorDistance);
         let liftTime = -(floorDistance*2);
-        console.log(liftTime);
+        //console.log(liftTime);
         idleLift.style.transitionDuration = liftTime.toString()+"s";
-        let distance = (150*(floorDistance+1)-(5*(floorDistance+2)));
+        let distance = (150*(floorDistance+1)+(5*(floorDistance+1)));
         idleLift.setAttribute("state","busy");
         if(id == 0){
             idleLift.style.top = "0px";
