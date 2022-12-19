@@ -26,11 +26,18 @@ box.setAttribute("id","lifts");
 back.addEventListener("click",(e) =>{
     e.preventDefault();
     let plan = document.getElementById("plan");
-    let child = plan.lastElementChild; 
+    let child = plan.lastElementChild;
+    let lift = box.lastChild;
+    //console.log(lift); 
     while (child) {
         plan.removeChild(child);
         child = plan.lastElementChild;
     }
+    while(lift){
+        box.removeChild(lift);
+        lift = box.lastChild;
+    }
+    console.log(plan);
     action.style.display = "none";
     inputsSection.style.display = "flex";
 });
