@@ -9,8 +9,10 @@ let liftTime;
 //const lift = {};
 
 let inputsSection = document.getElementById("inputSection");
-let enteredFloor = document.getElementById("enterFloors").getAttribute("value");
-let enteredLift = document.getElementById("enterLifts").getAttribute("value");
+let enteredFloor = document.getElementById("enterFloors");
+let floorValue = enteredFloor.value;
+let enteredLift = document.getElementById("enterLifts");
+let liftValue = enteredLift.value;
 let startBtn = document.getElementById("generateBtn");
 let topBtn = document.getElementById("top-btn");
 let action = document.getElementById("action");
@@ -45,10 +47,20 @@ reset.addEventListener("click",(e) => {
 startBtn.addEventListener("click",(e) => {
     e.preventDefault();
     //console.log("yo");
-    addLift(enteredLift,enteredFloor);
+    //console.log(liftValue);
+    addLift(liftValue,floorValue);
     action.style.display = "flex";
     inputsSection.style.display = "none";
 
+})
+
+enteredFloor.addEventListener("change",(e) => {
+    //console.log(e);
+    floorValue = e.target.value;
+})
+
+enteredLift.addEventListener("change",(e) => {
+    liftValue = e.target.value;
 })
 
 const addLift = (numOfLifts,numOfFloors) =>{
@@ -60,7 +72,7 @@ const addLift = (numOfLifts,numOfFloors) =>{
     //console.log("box");
     //console.log(numOfLifts);
     for(let j = 1;j<=numOfFloors;j++){
-        console.log("34");
+        //console.log("34");
         const newFloor = document.createElement("div");
         newFloor.setAttribute("class","floor");
         newFloor.setAttribute("id","floorLayout");
@@ -70,7 +82,7 @@ const addLift = (numOfLifts,numOfFloors) =>{
         const levelNo = document.createElement("div");
         levelNo.setAttribute("class","level");
         levelNo.setAttribute("id",(j-1).toString());
-		console.log(j);
+		//console.log(j);
         levelNo.innerHTML = "Floor "+(j).toString();
         const upButton = document.createElement("button");
         upButton.setAttribute("class","up");
@@ -94,7 +106,7 @@ const addLift = (numOfLifts,numOfFloors) =>{
         buttons[j] = buttonLayout;
         plan.prepend(newFloor);
 		floors[j-1] = newFloor;
-        console.log("plan");
+        //console.log("plan");
     }
 
     for(let i = 0;i<numOfLifts;i++){
@@ -123,7 +135,7 @@ const addLift = (numOfLifts,numOfFloors) =>{
         //console.log(id);
     }
     //const box = document.getElementById("lifts")
-    console.log(box);
+    //console.log(box);
     const plan = document.getElementById("plan").childNodes[numOfFloors-1];
     plan.appendChild(box);
     //console.log(lifts);	
@@ -140,7 +152,7 @@ const startLift = (id) =>{
         //console.log(freeLifts);
     //console.log(direction);
         idleLift = lifts.find((lift) => lift.getAttribute("state") == "idle");
-        console.log(idleLift);
+        //console.log(idleLift);
         //let liftNo = 0;
                 //console.log(lifts[0].)
                 //console.log(idleLift);
@@ -150,7 +162,7 @@ const startLift = (id) =>{
             return;
         }
         let floorDistance = Number(idleLift.getAttribute("floor"))-id;
-        console.log(floorDistance);
+        //console.log(floorDistance);
         liftTime = -(floorDistance*2);
         //console.log(liftTime);
         idleLift.style.transitionDuration = liftTime.toString()+"s";
@@ -159,7 +171,7 @@ const startLift = (id) =>{
         if(id == 0){
             idleLift.style.top = "0px";
         }else{
-            console.log(distance);
+        //    console.log(distance);
             idleLift.style.top = distance.toString()+"px";
          }
          idleLift.setAttribute("state","busy");
@@ -172,7 +184,7 @@ const startLift = (id) =>{
     
         setTimeout(()=>{
                 
-                console.log(liftRequest);
+                //console.log(liftRequest);
                 openDoors(idleLift);
                 //if(liftRequest.length > 0){}
             },liftTime*1000)
