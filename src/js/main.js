@@ -5,17 +5,62 @@ const floors = [];
 const buttons = [];
 //const direction = {"Up":0,"Down":1};
 const liftRequest = [];
+let liftTime;
 //const lift = {};
 
-const addLift = (numOfLifts = 2,numOfFloors = 3) =>{
+let inputsSection = document.getElementById("inputSection");
+let enteredFloor = document.getElementById("enterFloors").getAttribute("value");
+let enteredLift = document.getElementById("enterLifts").getAttribute("value");
+let startBtn = document.getElementById("generateBtn");
+let topBtn = document.getElementById("top-btn");
+let action = document.getElementById("action");
+let reset = document.getElementById("reset");
+let back = document.getElementById("back"); 
+
+const box = document.createElement("div");
+box.setAttribute("class","liftWrapper");
+box.setAttribute("id","lifts");
+
+back.addEventListener("click",(e) =>{
+    e.preventDefault();
+    let plan = document.getElementById("plan");
+    let child = plan.lastElementChild; 
+    while (child) {
+        plan.removeChild(child);
+        child = plan.lastElementChild;
+    }
+    action.style.display = "none";
+    inputsSection.style.display = "flex";
+});
+
+reset.addEventListener("click",(e) => {
+    e.preventDefault();
+    let child = box.childNodes; 
+    console.log(child);
+    for(let i = 0;i<child.length;i++) {
+        child[i].style.top = "0px";
+    }
+});
+
+startBtn.addEventListener("click",(e) => {
+    e.preventDefault();
+    //console.log("yo");
+    addLift(enteredLift,enteredFloor);
+    action.style.display = "flex";
+    inputsSection.style.display = "none";
+
+})
+
+const addLift = (numOfLifts,numOfFloors) =>{
 	
     //buttons[0] = document.getElementById("btnSet");
 	//lifts[0] = document.getElementById("set");
     //console.log("firstCll");
-    const box = document.getElementById("set");
-    //console.log(box);
-
+    //const box = document.getElementById("set");
+    //console.log("box");
+    //console.log(numOfLifts);
     for(let j = 1;j<=numOfFloors;j++){
+        console.log("34");
         const newFloor = document.createElement("div");
         newFloor.setAttribute("class","floor");
         newFloor.setAttribute("id","floorLayout");
@@ -49,6 +94,7 @@ const addLift = (numOfLifts = 2,numOfFloors = 3) =>{
         buttons[j] = buttonLayout;
         plan.prepend(newFloor);
 		floors[j-1] = newFloor;
+        console.log("plan");
     }
 
     for(let i = 0;i<numOfLifts;i++){
@@ -66,22 +112,24 @@ const addLift = (numOfLifts = 2,numOfFloors = 3) =>{
         newLift.appendChild(rightDoor);
         //let liftPosition = 
         //newLift.style.top = 
-        const box = document.createElement("div");
-        box.setAttribute("class","sys");
+        
         //console.log(box);
         box.appendChild(newLift);
-        const plan = document.getElementById("plan").childNodes[numOfFloors-1];
-        plan.appendChild(box);
+        
         //console.log(plan);
         lifts.push(newLift);
         //console.log(lifts);
         //id = id+1;
         //console.log(id);
     }
+    //const box = document.getElementById("lifts")
+    console.log(box);
+    const plan = document.getElementById("plan").childNodes[numOfFloors-1];
+    plan.appendChild(box);
     //console.log(lifts);	
 };
 
-addLift(1,6);
+//addLift(3,10);
 
 
 const startLift = (id) =>{
@@ -98,11 +146,12 @@ const startLift = (id) =>{
                 //console.log(idleLift);
         
         if(idleLift.getAttribute("floor")== id.toString()){
-            
+            openDoors(idleLift);
+            return;
         }
         let floorDistance = Number(idleLift.getAttribute("floor"))-id;
         console.log(floorDistance);
-        let liftTime = -(floorDistance*2);
+        liftTime = -(floorDistance*2);
         //console.log(liftTime);
         idleLift.style.transitionDuration = liftTime.toString()+"s";
         let distance = (150*(floorDistance+1)+(5*(floorDistance+1)));
@@ -126,7 +175,7 @@ const startLift = (id) =>{
                 console.log(liftRequest);
                 openDoors(idleLift);
                 //if(liftRequest.length > 0){}
-            },2000)
+            },liftTime*1000)
 };
 
 const openDoors = (lift) =>{

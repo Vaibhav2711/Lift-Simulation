@@ -6,7 +6,23 @@
     <title>Lift Simulation</title>
   </head>
   <body>
-    <button class="back">Back</button>
+    <div class="actionBtns" id = "action">
+        <button class="reset" id = "reset">Reset</button>
+        <button class="back" id = "back">Back</button>
+    </div>
+    
+    <div class="input-section" id="inputSection">
+        <div>
+            <label class="lbl"> No. of floors</label>
+            <input class="input" id="enterFloors" type="number" value="5" placeholder="Atleast 2 floors"></input>
+        </div>
+        <div>
+            <label class="lbl"> No. of lifts</label>
+            <input class="input" id="enterLifts" type="number" value="2" placeholder="Atleast 2 lifts"></input>
+        </div>
+
+        <button class="generateBtn" id="generateBtn">Create Plan</button>
+    </div>
     <div id = "plan">       
         
 	</div>
