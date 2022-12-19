@@ -1,3 +1,8 @@
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
 .back{
     width: 50px;
     height: 25px;
@@ -178,4 +183,30 @@
     position: relative;
     top: 0px;
   }
+
+
+  @media screen and (max-width: 425px) {
+    .lift { 
+        height: 60px;
+        width: 30px;  
+
+    }
+
+    .lift_left,
+    .lift_right {
+        width: 20px;
+    }
+
+    .btn_lift_up,
+    .btn_lift_down {
+        width: 40px;
+        height: 15px;
+        font-size: 11px;
+    }
+
+    .floorText {
+        font-size: 13px;
+    }
+
+}
   

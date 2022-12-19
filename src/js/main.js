@@ -57,9 +57,29 @@ startBtn.addEventListener("click",(e) => {
     e.preventDefault();
     //console.log("yo");
     //console.log(liftValue);
-    addLift(liftValue,floorValue);
-    action.style.display = "flex";
-    inputsSection.style.display = "none";
+    //floorValue = Number(enteredFloor.value);
+    //liftValue = Number(enteredLift.value);
+
+    if (window.innerWidth <= 500 && lifts > 2) {
+        alert("This screen size can't have more than 2 lifts");
+    }
+    else if (window.innerWidth > 500 && window.innerWidth <= 768 && lifts > 4) {
+        alert("This screen size can't have more than 4 lifts");
+    }
+    else if (window.innerWidth > 500 && window.innerWidth <= 1024 && lifts > 7) {
+        alert("This screen size can't have more than 7 lifts");
+    }
+    else if (window.innerWidth > 500 && window.innerWidth <= 1440 && lifts > 10) {
+        alert("This screen size can't have more than 10 lifts");
+    }
+    else if (window.innerWidth > 500 && window.innerWidth <= 2560 && lifts > 19) {
+        alert("This screen size can't have more than 19 lifts");
+    }else{
+        addLift(liftValue,floorValue);
+        action.style.display = "flex";
+        inputsSection.style.display = "none";
+    }
+    
     //console.log(box);
 
 })
