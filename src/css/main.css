@@ -1,8 +1,18 @@
+.back{
+    margin-bottom: 200px;
+}
+.plan{
+    margin: 50px;
+    padding: 50px;
+    top: 50px;
+}
+
 .lift {
     width: 50px;
     height: 100px;
     background-color: gray;
     margin-left: 80px;
+    /*margin-bottom: 150px;*/
     position: relative;
     top: 0px;
     transition: top ease-in-out;
@@ -16,6 +26,7 @@
     height: 100px;
     background-color: black;
     border: 1px solid white;
+    border-bottom: 0px;
     /*height: 100px;
     background-color: black;
     
@@ -29,6 +40,7 @@
     height: 100px;
     background-color: black;
     border: 1px solid white;
+    border-bottom: 0px;
     /*margin-left: 105px;
     /*height: 100px;
     
@@ -43,7 +55,9 @@
     display: flex;
     flex-direction: row;
     align-items: auto;
-    margin-top: 400px;
+    position: relative;
+    top: -50px;
+    
   }
   
   
@@ -51,14 +65,12 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 470px;
+    bottom: 90px;
   }
-  
-  .btnss {
+
+  .upDown{
     display: flex;
     flex-direction: column;
-    position: relative;
-    top: 400px;
   }
   
   
@@ -86,11 +98,16 @@
     width: 100%;
     height: 5px;
     background-color: #555;
+    display: flex;
+    align-items: center;
+    margin-bottom: 150px;
+    
+  }
+
+  .floorWrapper{
+    display: flex;
+    flex-direction: column;
     position: relative;
     top: 0px;
-  }
-  
-  .level{
-      margin-bottom: -20px;
   }
   

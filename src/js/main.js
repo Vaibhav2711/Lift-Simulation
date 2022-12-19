@@ -3,19 +3,53 @@
 const lifts = [];
 const floors = [];
 const buttons = [];
-const direction = {"Up":0,"Down":1};
+//const direction = {"Up":0,"Down":1};
 const liftRequest = [];
 //const lift = {};
 
 const addLift = (numOfLifts = 2,numOfFloors = 3) =>{
 	
-	
-	
-	//buttons[0] = document.getElementById("btnSet");
+    //buttons[0] = document.getElementById("btnSet");
 	//lifts[0] = document.getElementById("set");
     //console.log("firstCll");
     const box = document.getElementById("set");
     //console.log(box);
+
+    for(let j = 1;j<=numOfFloors;j++){
+        const newFloor = document.createElement("div");
+        newFloor.setAttribute("class","floor");
+        newFloor.setAttribute("id","floorLayout");
+        //newFloor.style.marginBottom = "50px";
+        const buttonLayout = document.createElement("div");
+        buttonLayout.setAttribute("class","btns");
+        const levelNo = document.createElement("div");
+        levelNo.setAttribute("class","level");
+        levelNo.setAttribute("id",(j-1).toString());
+		console.log(j);
+        levelNo.innerHTML = "Floor "+(j).toString();
+        const upButton = document.createElement("button");
+        upButton.setAttribute("class","up");
+        upButton.setAttribute("id",j.toString());
+        upButton.addEventListener("click",()=> startLift(j));
+        //upButton.setAttribute("onclick","buttonClick(this.className,this.id);this.onclick=null;")   ;
+		upButton.innerHTML = "UP";
+        //console.log(upButton);
+        const downButton = document.createElement("button");
+        downButton.setAttribute("class","down");
+		downButton.innerHTML = "DOWN";
+        const upDown = document.createElement("div");
+        upDown.setAttribute("class","upDown");
+        upDown.appendChild(upButton);
+        upDown.appendChild(downButton);
+        downButton.addEventListener("click",()=> startLift(z));
+        buttonLayout.appendChild(levelNo);
+        buttonLayout.appendChild(upDown);
+        newFloor.appendChild(buttonLayout);
+        const plan = document.getElementById("plan");
+        buttons[j] = buttonLayout;
+        plan.prepend(newFloor);
+		floors[j-1] = newFloor;
+    }
 
     for(let i = 0;i<numOfLifts;i++){
         //let id = 1;
@@ -30,68 +64,24 @@ const addLift = (numOfLifts = 2,numOfFloors = 3) =>{
         newLift.setAttribute("floor","0");
         newLift.appendChild(leftDoor);
         newLift.appendChild(rightDoor);
-        console.log(newLift);
-        const box = document.getElementById("set");
+        //let liftPosition = 
+        //newLift.style.top = 
+        const box = document.createElement("div");
+        box.setAttribute("class","sys");
         //console.log(box);
-        box.appendChild(newLift);	
+        box.appendChild(newLift);
+        const plan = document.getElementById("plan").childNodes[numOfFloors-1];
+        plan.appendChild(box);
+        //console.log(plan);
         lifts.push(newLift);
         //console.log(lifts);
         //id = id+1;
         //console.log(id);
     }
-
-    for(let j = 1;j<=numOfFloors;j++){
-        const newFloor = document.createElement("div");
-        newFloor.setAttribute("class","floor");
-        let spacing = 150*j;
-        let floorSpacing = "-"+spacing.toString()+"px";
-        //console.log(floorSpacing);
-        newFloor.style.top = floorSpacing;
-        const plan = document.getElementById("plan");
-        plan.appendChild(newFloor);
-		floors[j-1] = newFloor;
-    }
-
-    //console.log(lifts);
-
-	for(let z = 0;z<=numOfFloors;z++){
-		const buttonLayout = document.createElement("div");
-        buttonLayout.setAttribute("class","btns");
-        const levelNo = document.createElement("div");
-        levelNo.setAttribute("class","level");
-        levelNo.setAttribute("id",z.toString());
-		//console.log(z);
-        levelNo.innerHTML = "Floor "+(z).toString();
-        const upButton = document.createElement("button");
-        upButton.setAttribute("class","up");
-        upButton.setAttribute("id",z.toString());
-        upButton.addEventListener("click",()=> startLift(z));
-        //upButton.setAttribute("onclick","buttonClick(this.className,this.id);this.onclick=null;")   ;
-		upButton.innerHTML = "UP";
-        //console.log(upButton);
-        const downButton = document.createElement("button");
-        downButton.setAttribute("class","down");
-		downButton.innerHTML = "DOWN";
-        downButton.addEventListener("click",()=> startLift(z));
-        buttonLayout.appendChild(levelNo);
-        buttonLayout.appendChild(upButton);
-        buttonLayout.appendChild(downButton);
-        let buttonSpacing = 400-(70*(z-1));
-        let layoutSpacing = buttonSpacing.toString()+"px";
-		//console.log(layoutSpacing);
-        buttonLayout.style.top = layoutSpacing;
-		buttons[z] = buttonLayout;
-        const plan1 = document.getElementById("floorLevel");
-        //console.lo
-        //plan1.appendChild(newFloor);
-        plan1.insertBefore(buttonLayout,plan1.children[0]);
-	}
-	//console.log(lifts[3]);
-	//console.log(floors);
-	//console.log(buttons);
+    //console.log(lifts);	
 };
 
-addLift(2,6);
+addLift(1,6);
 
 
 const startLift = (id) =>{
@@ -106,12 +96,15 @@ const startLift = (id) =>{
         //let liftNo = 0;
                 //console.log(lifts[0].)
                 //console.log(idleLift);
-        idleLift.style.transitionDuration = "2s";
+        
         if(idleLift.getAttribute("floor")== id.toString()){
             
         }
         let floorDistance = Number(idleLift.getAttribute("floor"))-id;
-        let distance = (150*floorDistance+(5*(Number(id)+1)));
+        let liftTime = -(floorDistance*2);
+        console.log(liftTime);
+        idleLift.style.transitionDuration = liftTime.toString()+"s";
+        let distance = (150*(floorDistance+1)-(5*(floorDistance+2)));
         idleLift.setAttribute("state","busy");
         if(id == 0){
             idleLift.style.top = "0px";
@@ -147,15 +140,12 @@ const openDoors = (lift) =>{
         left.style.transitionDuration = "2.5s";
         right.style.transform = `translate(0px,0px)`;
         right.style.transitionDuration = "2.5s";
+    },2500)
+    setTimeout(()=>{
         lift.setAttribute("state","idle");
         if(liftRequest.length > 0){
             startLift(liftRequest[0]);
             liftRequest.shift();
         }
-    },2000)
-}
-
-
-//Track of up down button
-//Track of which floor the button was pressed
-//Track of the lift
+    },5000)
+};
