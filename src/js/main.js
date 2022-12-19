@@ -40,6 +40,7 @@ reset.addEventListener("click",(e) => {
     let child = box.childNodes; 
     console.log(child);
     for(let i = 0;i<child.length;i++) {
+        child[i].style.transitionDuration = "0s"
         child[i].style.top = "0px";
     }
 });
