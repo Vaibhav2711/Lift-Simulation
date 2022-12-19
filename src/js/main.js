@@ -60,19 +60,21 @@ startBtn.addEventListener("click",(e) => {
     //floorValue = Number(enteredFloor.value);
     //liftValue = Number(enteredLift.value);
 
+    console.log(window.innerWidth);
+
     if (window.innerWidth <= 500 && lifts > 2) {
         alert("This screen size can't have more than 2 lifts");
     }
-    else if (window.innerWidth > 500 && window.innerWidth <= 768 && lifts > 4) {
+    else if (window.innerWidth > 500 && window.innerWidth <= 768 && liftValue > 4) {
         alert("This screen size can't have more than 4 lifts");
     }
-    else if (window.innerWidth > 500 && window.innerWidth <= 1024 && lifts > 7) {
+    else if (window.innerWidth > 500 && window.innerWidth <= 1024 && liftValue > 7) {
         alert("This screen size can't have more than 7 lifts");
     }
-    else if (window.innerWidth > 500 && window.innerWidth <= 1440 && lifts > 10) {
+    else if (window.innerWidth > 500 && window.innerWidth <= 1440 && liftValue > 10) {
         alert("This screen size can't have more than 10 lifts");
     }
-    else if (window.innerWidth > 500 && window.innerWidth <= 2560 && lifts > 19) {
+    else if (window.innerWidth > 500 && window.innerWidth <= 2560 && liftValue > 19) {
         alert("This screen size can't have more than 19 lifts");
     }else{
         addLift(liftValue,floorValue);
