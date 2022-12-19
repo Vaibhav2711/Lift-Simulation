@@ -25,7 +25,7 @@ box.setAttribute("id","lifts");
 
 back.addEventListener("click",(e) =>{
     e.preventDefault();
-    let plan = document.getElementById("plan");
+    /*let plan = document.getElementById("plan");
     let child = plan.lastElementChild;
     let lift = box.lastChild;
     //console.log(lift); 
@@ -39,7 +39,8 @@ back.addEventListener("click",(e) =>{
     }
     console.log(plan);
     action.style.display = "none";
-    inputsSection.style.display = "flex";
+    inputsSection.style.display = "flex";*/
+    location.reload();
 });
 
 reset.addEventListener("click",(e) => {
@@ -59,6 +60,7 @@ startBtn.addEventListener("click",(e) => {
     addLift(liftValue,floorValue);
     action.style.display = "flex";
     inputsSection.style.display = "none";
+    //console.log(box);
 
 })
 
@@ -155,14 +157,14 @@ const addLift = (numOfLifts,numOfFloors) =>{
 const startLift = (id) =>{
     //const allLifts = Array.from(document.querySelectorAll(".lift"));
     //liftRequest.push(id);
-    console.log("fire");
+    //console.log("fire");
     let idleLift;
-    console.log("160");
+    //console.log("160");
     if(lifts.find((lift) => lift.getAttribute("state") == "idle")){
-        console.log("162");
+    //    console.log("162");
     //console.log(direction);
         idleLift = lifts.find((lift) => lift.getAttribute("state") == "idle");
-        //console.log(idleLift);
+    //    console.log(idleLift);
         //let liftNo = 0;
                 //console.log(lifts[0].)
                 //console.log(idleLift);
@@ -194,7 +196,7 @@ const startLift = (id) =>{
     
         setTimeout(()=>{
                 
-                //console.log(liftRequest);
+        //        console.log(liftRequest);
                 openDoors(idleLift);
                 //if(liftRequest.length > 0){}
             },liftTime*1000)
