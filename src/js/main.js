@@ -1,6 +1,6 @@
 //Add new lift
 
-const lifts = [];
+let lifts = [];
 const floors = [];
 const buttons = [];
 //const direction = {"Up":0,"Down":1};
@@ -44,13 +44,25 @@ back.addEventListener("click",(e) =>{
 });
 
 reset.addEventListener("click",(e) => {
-    e.preventDefault();
+    /*const layout = document.getElementById("plan");
+    const liftWrapper = document.getElementById("lifts");
+    layout.replaceChildren();
+    liftWrapper.replaceChildren();
+    e.preventDefault();*/
     let child = box.childNodes; 
     console.log(child);
     for(let i = 0;i<child.length;i++) {
         child[i].style.transitionDuration = "0s"
         child[i].style.top = "0px";
+        child[i].style.floor = "1";
+        child[i].style.state = "idle";
+        //lifts.push(child[i]);
     }
+    for(let j =0;j<liftValue;j++){
+        lifts[j].setAttribute("floor","1");
+    }
+    //addLift(liftValue,floorValue);
+
 });
 
 startBtn.addEventListener("click",(e) => {
@@ -105,9 +117,11 @@ const addLift = (numOfLifts,numOfFloors) =>{
     //console.log(numOfLifts);
     for(let j = 1;j<=numOfFloors;j++){
         //console.log("34");
+        let floorHeight = (150*(j-1)+(5*(j-1)))*(-1);
         const newFloor = document.createElement("div");
         newFloor.setAttribute("class","floor");
         newFloor.setAttribute("id","floorLayout");
+        newFloor.setAttribute("floorHeight",floorHeight.toString());
         //newFloor.style.marginBottom = "50px";
         const buttonLayout = document.createElement("div");
         buttonLayout.setAttribute("class","btns");
@@ -138,7 +152,7 @@ const addLift = (numOfLifts,numOfFloors) =>{
         buttons[j] = buttonLayout;
         plan.prepend(newFloor);
 		floors[j-1] = newFloor;
-        //console.log("plan");
+        //console.log(floors);
     }
 
     for(let i = 0;i<numOfLifts;i++){
@@ -151,7 +165,7 @@ const addLift = (numOfLifts,numOfFloors) =>{
         newLift.setAttribute("class","lift");
         newLift.setAttribute("id",i.toString());
         newLift.setAttribute("state","idle");
-        newLift.setAttribute("floor","0");
+        newLift.setAttribute("floor","1");
         newLift.appendChild(leftDoor);
         newLift.appendChild(rightDoor);
         //let liftPosition = 
@@ -180,6 +194,7 @@ const startLift = (id) =>{
     //const allLifts = Array.from(document.querySelectorAll(".lift"));
     //liftRequest.push(id);
     //console.log("fire");
+    console.log(lifts[0].getAttribute("floor"));
     let idleLift;
     //console.log("160");
     if(lifts.find((lift) => lift.getAttribute("state") == "idle")){
@@ -195,20 +210,28 @@ const startLift = (id) =>{
             openDoors(idleLift);
             return;
         }
+        console.log(idleLift.getAttribute("floor"));
+        console.log(id);
+        //console.log("floor ",floors[id-1]);
         let floorDistance = Number(idleLift.getAttribute("floor"))-id;
         //console.log(floorDistance);
-        liftTime = -(floorDistance*2);
-        //console.log(liftTime);
+        liftTime = Math.abs(floorDistance*2);
+        console.log(liftTime);
         idleLift.style.transitionDuration = liftTime.toString()+"s";
-        let distance = (150*(floorDistance+1)+(5*(floorDistance+1)));
+        let destination = floors[id-1].getAttribute("floorheight");
+        //console.log(destination);
+        //console.log(distance);
         idleLift.setAttribute("state","busy");
         if(id == 0){
             idleLift.style.top = "0px";
         }else{
         //    console.log(distance);
-            idleLift.style.top = distance.toString()+"px";
+            idleLift.style.top = destination+"px";
          }
          idleLift.setAttribute("state","busy");
+         idleLift.setAttribute("floor",id.toString());
+         //console.log(idleLift.getAttribute("floor"));
+         console.log(idleLift);
          
 
     }
